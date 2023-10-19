@@ -1,0 +1,33 @@
+/*palette */
+
+:root {
+    --primary-blue: #3A0CA3;
+    --primary-azure: #4361EE;
+    --secondary-turquiose: #4CC9F0;
+    --secondary-purple: #7209B7;
+}
+
+
+#field {
+    width: 600px;
+    height: 600px;
+    background-color: var(--primary-blue);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pressed {
+    background-color: var(--secondary-turquiose);
+}
+
+.box {
+    border: 2px solid var(--primary-azure);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-turquiose);
+}
+
+.explosion {
+    background-color: rgb(249, 76, 76);
+}
