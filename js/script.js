@@ -18,7 +18,6 @@ function Minefield() {
     let score = 0;
 
     btn.addEventListener('click', () => {
-        
         //creo un'array in cui andranno i numeri rng a cui attribuirò le bombe
         let mines = [];
 
@@ -29,9 +28,6 @@ function Minefield() {
         //creo una costante per il numero delle caselle
         let boxNum;
         boxNum= levelCreator(level);
-
-        let box;
-
         //associo all'array il return della funzione minegenerator
         mines = mineGenerator(mines, boxNum);
 
@@ -44,12 +40,14 @@ function Minefield() {
         for(let i = 1; i <= boxNum; i++) {
             let box = addBox(i,boxNum);
             field.append(box);
+            console.log(mines);
         };
+        
 
         //creo una funzione che mi generi div e aggiunga la classe alla box 
         function addBox(index, howmanyboxes) {
             //creo il div della box
-            box = document.createElement('div');
+            let box = document.createElement('div');
             //aggiungo la classe al div
             box.classList.add('box');
             const boxWidth = Math.sqrt(howmanyboxes);
@@ -63,7 +61,6 @@ function Minefield() {
             box.addEventListener('click', function() {
                 //ora metto la condizione che se la casella cliccata corrisponderà ad una delle caselle rng estratte dentro l'array mines allora esploderà!
                 //altrimenti si illuminerà normalmente
-                console.log(mines);
                 if(mines.includes(parseInt(box.innerHTML))) {
                     box.classList.add('explosion');
                     box.style.color = 'var(--primary-blue)';
@@ -74,8 +71,34 @@ function Minefield() {
                     box.style.color = 'var(--primary-blue)';
                     console.log('hai cliccato il tasto numero:' + index);
                     score ++;
+                    console.log(`Punteggio: ${score}`);
                 }
+
+                if(score === 84 && level === 'easy') {
+                    alert('Hai evitato tutte le Mine! Punteggio: 84!');
+                    box.removeEventListener;
+                    field.innerHTML = '';
+                } else if (score === 65 && level === 'normal') {
+                    alert('Hai evitato tutte le Mine! Punteggio: 65!');
+                    box.removeEventListener;
+                    field.innerHTML = '';
+                } else if (score === 33 && level === 'hard') {
+                    alert('Hai evitato tutte le Mine! Punteggio: 33!');
+                    box.removeEventListener;
+                    field.innerHTML = '';
+                }
+
+                if(gameOver) {
+                    const item = alert(`
+                    Hai calpestato una Mina! 
+                    Punteggio: ${score}
+                    Premi "Gioca" per riprovare
+                    `);
+                    box.removeEventListener;
+                    field.innerHTML = '';
+                };
             });
+
             return box;
         };
     });
