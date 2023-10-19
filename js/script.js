@@ -86,16 +86,15 @@ function Minefield() {
                     alert('Hai evitato tutte le Mine! Punteggio: 33!');
                     box.removeEventListener;
                     field.innerHTML = '';
-                }
+                };
 
                 if(gameOver) {
-                    const item = alert(`
+                    alert(`
                     Hai calpestato una Mina! 
                     Punteggio: ${score}
                     Premi "Gioca" per riprovare
                     `);
                     box.removeEventListener;
-                    field.innerHTML = '';
                 };
             });
 
