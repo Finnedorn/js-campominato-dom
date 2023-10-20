@@ -13,11 +13,14 @@ Minefield();
 function Minefield() {
     //richiamo il bottone dall'html
     const btn = document.querySelector('button');
-    //mi creo una costante per le bombe sparse, in tutto 16
+    //la variabile del gameover che si attiverà in caso di true 
     let gameOver = false;
+    //la variabile del punteggio, incrementerà con ogni pulsante premuto
     let score = 0;
 
     btn.addEventListener('click', () => {
+        //voglio che dopo il gameover del gioco facendo ripartire il tutto il gameover torni ad essere inattivo fino ad eventuale gameover stesso dell'utente
+        gameOver = false;
         //creo un'array in cui andranno i numeri rng a cui attribuirò le bombe
         let mines = [];
 
@@ -73,7 +76,7 @@ function Minefield() {
                     score ++;
                     console.log(`Punteggio: ${score}`);
                 }
-
+                //se lo score raggiunto è pari al num totale di caselle in griglia (a seconda della difficoltà) meno le 16 delle mine allora parte il messaggio di vittoria, in tutti i casi al termine della cosa si è inabilitati a premere le caselle di nuovo
                 if(score === 84 && level === 'easy') {
                     alert('Hai evitato tutte le Mine! Punteggio: 84!');
                     box.removeEventListener;
@@ -87,7 +90,7 @@ function Minefield() {
                     box.removeEventListener;
                     field.innerHTML = '';
                 };
-
+                //ecco l'effetto di proc del game over:
                 if(gameOver) {
                     alert(`
                     Hai calpestato una Mina! 
@@ -97,11 +100,12 @@ function Minefield() {
                     box.removeEventListener;
                 };
             });
-
+            //mi serve il return in quanto ho creato una let interna alla funzione che mi serve portare fuori 
             return box;
         };
     });
 
+    //creo una funzione che sulla base dell'opzione scelta dal select mi crei una griglia a difficoltà differenti 
     function levelCreator(difficulty) {
         switch(difficulty) {
             case 'easy':
@@ -123,6 +127,7 @@ function Minefield() {
 
     //mi creo una funzione che mi geenri le mine
     function mineGenerator(elArray, numOfBoxes) {
+        //mi creo una costante per le bombe sparse, in tutto 16 quindi 15 in quanto divenendo elementi di un array, pure lo 0 sarà un elemento
         const numMines = 15;
         //creo un ciclo while che cicli fino a che mines non ha 16 elementi estratti a caso
         while(elArray.length <= numMines) {
